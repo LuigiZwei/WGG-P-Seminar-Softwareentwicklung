@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://gigmfptg13vh"]
+
+[ext_resource type="Texture2D" uid="uid://pihbwlpd0lo5" path="res://assets/Raum2.png" id="1_c80fy"]
+
+[node name="raum2" type="Node2D"]
+
+[node name="background" type="Node2D" parent="."]
+scale = Vector2(2.37, 0.617)
+
+[node name="Sprite2D" type="Sprite2D" parent="background"]
+scale = Vector2(5, 5)
+texture = ExtResource("1_c80fy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-18, -11)
+scale = Vector2(-152.133, 91314.3)
+build_mode = 1
+polygon = PackedVector2Array(6.54691, -0.00505945, 9.91239, 0.000722778, 0.315514, 0.000810388, -0.499563, -0.00519086, -13.5671, -0.00536608, -12.9361, 0.00045995, -20.0614, 0.000416145, -19.4304, 0.00427096, 17.9843, 0.00413955, 16.0123, -0.00514706)

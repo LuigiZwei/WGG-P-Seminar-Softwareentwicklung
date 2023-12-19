@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnlfcoecg2nbk"]
+
+[ext_resource type="Texture2D" uid="uid://b5vyfl8cmuhe7" path="res://assets/Chemiesaal_2(-).png" id="1_5t6l2"]
+[ext_resource type="Curve" uid="uid://crta6p3kqaybb" path="res://assets/new_curve.tres" id="2_wxdjs"]
+
+[sub_resource type="Gradient" id="Gradient_0tuxm"]
+offsets = PackedFloat32Array(0.346667, 1)
+
+[node name="chemie-saal" type="Node2D"]
+
+[node name="background" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="background"]
+scale = Vector2(5, 5)
+texture = ExtResource("1_5t6l2")
+
+[node name="map_border" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map_border"]
+position = Vector2(-16, -11)
+scale = Vector2(1.00259, 0.859045)
+build_mode = 1
+polygon = PackedVector2Array(-1950, -1.164, -1950, 250, -1414, 250, -1414, 270, -1922.5, 270, -2342, 757, 2570.34, 757, 2570.34, 542.463, 2380, 315.467, 2380, 135, 1950, 135, 1950, 300, 1152, 300, 990, 106, -897.675, 106, -1173.96, -1.16408)
+
+[node name="door" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="door"]
+build_mode = 1
+polygon = PackedVector2Array(1943, 108, 2368, 107, 2366, 256, 2358, 257, 2358, 114, 1952, 116, 1952, 251, 1941, 251)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(2000, -50)
+rotation = -0.645772
+amount = 1531
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+angular_velocity_min = -421.82
+angular_velocity_max = 276.36
+angular_velocity_curve = ExtResource("2_wxdjs")
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+radial_accel_min = -84.85
+radial_accel_max = 78.79
+scale_amount_min = 0.0
+scale_amount_max = 2.65
+color_ramp = SubResource("Gradient_0tuxm")
+anim_speed_min = -6.1
+anim_speed_max = 51.1
+anim_offset_min = 0.3635
+anim_offset_max = 0.403
