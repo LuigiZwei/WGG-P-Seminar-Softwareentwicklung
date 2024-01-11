@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://drcml28hudsgp"]
+
+[ext_resource type="Texture2D" uid="uid://cgn052vj3e5l6" path="res://assets/classroom.jpg" id="1_dy1aa"]
+[ext_resource type="PackedScene" uid="uid://dnejor22xmk5e" path="res://scenes/player.tscn" id="2_d3wc8"]
+
+[node name="Classroom" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(574, 328)
+scale = Vector2(0.742222, 0.742222)
+texture = ExtResource("1_dy1aa")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(416, 99, 695, 103, 997, 438, 1005, 645, 132, 639, 129, 659, 1158, 657, 1161, -5, -5, -1, -14, 645, 131, 641, 140.577, 432.846)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_d3wc8")]
+position = Vector2(604, 423)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnejor22xmk5e"]
+
+[ext_resource type="Script" path="res://scripts/movement.gd" id="1_i2sp5"]
+[ext_resource type="Texture2D" uid="uid://b1a6ox24tjv2q" path="res://assets/player.png" id="2_tbxlw"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_i2sp5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("2_tbxlw")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(6.84499, -5)
+scale = Vector2(0.998569, 1)
+polygon = PackedVector2Array(-63.9365, -76, -52.9207, -92, -34.8949, -107, -16.8691, -114, 8.1667, -114, 32.2011, -100, 46.2212, -85, 53.2312, -71, 55.2341, -51, 53.2312, -26, 41.214, -22, 27.1939, -5, 11.171, 6, 37.2083, 40, 43.2169, 54, 31.1997, 58, 16.1782, 33, 16.1782, 124, 3.15953, 125, -5.85337, 72, -14.8663, 126, -26.8835, 127, -25.882, 33, -39.9021, 62, -52.9207, 59, -53.9221, 49, -24.8806, 4, -44.9093, -7, -54.9236, -19, -63.9365, -25, -68.9436, -36, -62.935, -41)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
