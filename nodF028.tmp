@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnlfcoecg2nbk"]
+
+[ext_resource type="Texture2D" uid="uid://b5vyfl8cmuhe7" path="res://assets/Chemiesaal_2(-).png" id="1_bmyiy"]
+[ext_resource type="Script" path="res://player.gd" id="2_m0crf"]
+[ext_resource type="Texture2D" uid="uid://wi6ilfx5bx8v" path="res://assets/schwarz.png" id="3_pifug"]
+[ext_resource type="Script" path="res://enter_new_room.gd" id="4_r63bq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2oab"]
+size = Vector2(20, 9.83884)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_h43so"]
+
+[node name="chemie-saal" type="Node2D"]
+
+[node name="background" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="background"]
+scale = Vector2(5, 5)
+texture = ExtResource("1_bmyiy")
+
+[node name="player" type="CharacterBody2D" parent="."]
+position = Vector2(0, 200)
+script = ExtResource("2_m0crf")
+
+[node name="Sprite2D" type="Sprite2D" parent="player"]
+scale = Vector2(0.648, 0.648)
+texture = ExtResource("3_pifug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(0, 207.05)
+scale = Vector2(14.15, 12.41)
+shape = SubResource("RectangleShape2D_l2oab")
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(0.5, 0.5)
+limit_left = -2530
+limit_top = -635
+limit_right = 2545
+limit_bottom = 635
+limit_smoothed = true
+drag_horizontal_enabled = true
+drag_left_margin = 0.1
+editor_draw_limits = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="map" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-18, -11)
+scale = Vector2(1.00259, 0.859045)
+build_mode = 1
+polygon = PackedVector2Array(-1952.94, -1.16408, -1947.96, 245.621, -1417.33, 251.442, -1414, 287.032, -1952, 278.516, -2342, 770.05, 2545, 781, 2565.36, 542.463, 2437.69, 408.593, 2333.96, 327.107, 2328.97, 149.003, 1991.84, 137.362, 1989.85, 296.841, 1152, 325.966, 990, 106, -897.675, 104.767, -1173.96, -1.16408)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2150, 200)
+scale = Vector2(110.2, 1)
+shape = SubResource("SegmentShape2D_h43so")
+script = ExtResource("4_r63bq")
