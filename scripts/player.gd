@@ -24,7 +24,6 @@ func _process(_delta):
 	velocity=Vector2(0,0)
 	
 	if(get_last_slide_collision()!=null):
-		print(get_last_slide_collision().get_collider_rid().get_id() )
 		if(get_last_slide_collision().get_collider_rid().get_id() == 4170413244417):
 			emit_signal("switch_room")
 		pass

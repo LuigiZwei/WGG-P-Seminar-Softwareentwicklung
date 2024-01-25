@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnlfcoecg2nbk"]
+
+[ext_resource type="Texture2D" uid="uid://b5vyfl8cmuhe7" path="res://assets/Chemiesaal_2(-).png" id="1_tmf37"]
+
+[node name="chemie-saal" type="Node2D"]
+
+[node name="backgroudn" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("1_tmf37")
+
+[node name="map_border" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map_border"]
+position = Vector2(-16, -11)
+scale = Vector2(1.00259, 0.859045)
+build_mode = 1
+polygon = PackedVector2Array(-1957.93, 121.065, -1950, 250, -1414, 250, -1414, 270, -1922.5, 270, -2342, 757, 2570.34, 757, 2570.34, 542.463, 2443.67, 401.609, 2341.93, 363.194, 2331.96, 308.482, 1986.85, 278.216, 1986.85, 381.819, 1872.15, 366.686, 1709.57, 133.87, 1626.79, 138.526, 1645.74, 292.185, 1152, 300, 1009.39, 133.87, 727.117, 108.26, 708.166, 151.331, -782.972, 151.331, -808.905, 121.065, -1181.94, 111.752)
+
+[node name="door" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="door"]
+position = Vector2(-18, 89)
+scale = Vector2(1.00259, 0.859045)
+build_mode = 1
+polygon = PackedVector2Array(1993.84, 179.269, 1995.83, 272.396, 2326.97, 271.231, 2331.96, 189.746)

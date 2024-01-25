@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cayy51fno8as2" path="res://assets/player.png" id="2_h2at2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2q0lb"]
-radius = 85.9999
-height = 218.15
+radius = 7.0
+height = 162.0
 
 [node name="player" type="Node2D"]
 
@@ -19,8 +19,8 @@ scale = Vector2(0.053, 0.053)
 texture = ExtResource("2_h2at2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-position = Vector2(-1, 108)
-rotation = 6.28319
+position = Vector2(0, 204)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_2q0lb")
 
 [node name="Camera2D" type="Camera2D" parent="player"]

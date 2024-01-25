@@ -6,7 +6,7 @@ var player_scene
 var player_instance
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	main_scene = preload("res://scenes/chemistry-room.tscn")
+	main_scene = preload("res://scenes/room_chemistry.tscn")
 	main_instance = main_scene.instantiate()
 	add_child(main_instance)
 	
@@ -15,7 +15,7 @@ func _ready():
 	add_child(player_instance)
 	
 	var door_node = get_node("/root/main/player/player")
-	door_node.connect("switch_room", Callable(self, "go_to_room2"), 0)
+	door_node.connect("switch_room", go_to_hallway_1, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -28,5 +28,5 @@ func switch_room(new_room): #switches the current main_room with another new new
 	main_instance = main_scene.instantiate()  
 	add_child(main_instance)
 
-func go_to_room2():
-	switch_room("res://scenes/room2.tscn")
+func go_to_hallway_1():
+	switch_room("res://scenes/hallway_1.tscn")
