@@ -24,7 +24,7 @@ rotation = 6.28319
 shape = SubResource("CapsuleShape2D_2q0lb")
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-position = Vector2(3.63798e-12, 0)
+position = Vector2(0, 1)
 zoom = Vector2(0.5, 0.5)
 limit_left = -2530
 limit_top = -635

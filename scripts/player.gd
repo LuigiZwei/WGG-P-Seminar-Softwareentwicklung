@@ -1,35 +1,37 @@
 extends CharacterBody2D
 
 var player_speed
-signal switch_room
+signal switch_room(path)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player_speed = 300
-	pass # Replace with function body.
+	player_speed = 50000
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(delta):
 	if Input.is_action_pressed("ui_left"):
-		velocity += player_speed * Vector2.LEFT
+		velocity += Vector2.LEFT
 	if Input.is_action_pressed("ui_right"):
-		velocity += player_speed * Vector2.RIGHT
+		velocity += Vector2.RIGHT
 	if Input.is_action_pressed("ui_up"):
-		velocity += player_speed * Vector2.UP
+		velocity += Vector2.UP
 	if Input.is_action_pressed("ui_down"):
-		velocity += player_speed * Vector2.DOWN
+		velocity += Vector2.DOWN
 	if !Input.is_anything_pressed():
 		velocity = Vector2.ZERO
+	velocity = velocity.normalized() * player_speed * delta
 	move_and_slide()
-	velocity=Vector2(0,0)
+	velocity = Vector2(0,0)
 	
-	if(get_last_slide_collision()!=null):
-		print(get_last_slide_collision().get_collider_rid().get_id() )
-		if(get_last_slide_collision().get_collider_rid().get_id() == 4170413244417):
-			emit_signal("switch_room")
-		pass
-	
+	if(get_last_slide_collision() != null ):
+		var collider = get_last_slide_collision().get_collider()
+		if(collider.has_meta("path")):
+			switch_room.emit(collider.get_meta("path"))
 
 #called every frame, used for physics stuff
 func _physics_process(_delta):
 	pass
+	
+func get_player_collider():
+	if(get_last_slide_collision() != null ):
+		return get_last_slide_collision().get_collider()
