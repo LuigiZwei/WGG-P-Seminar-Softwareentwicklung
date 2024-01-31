@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw327fybw3ce1"]
+
+[ext_resource type="Texture2D" uid="uid://bedsa4ae6te2a" path="res://assets/hallway_2.png" id="1_a8ta8"]
+
+[node name="Hallway2" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_a8ta8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
