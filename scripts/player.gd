@@ -3,7 +3,7 @@ extends CharacterBody2D
 const player_speed = 300
 const player_sprint_speed = 600
 var speed
-signal switch_room
+signal switch_room(path)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,21 +16,23 @@ func _process(_delta):
 	else:
 		speed = player_speed
 	if Input.is_action_pressed("ui_left"):
-		velocity += speed * Vector2.LEFT
+		velocity += Vector2.LEFT
 	if Input.is_action_pressed("ui_right"):
-		velocity += speed * Vector2.RIGHT
+		velocity += Vector2.RIGHT
 	if Input.is_action_pressed("ui_up"):
-		velocity += speed * Vector2.UP
+		velocity += Vector2.UP
 	if Input.is_action_pressed("ui_down"):
-		velocity += speed * Vector2.DOWN
-	if !Input.is_anything_pressed():
-		velocity = Vector2.ZERO
+		velocity += Vector2.DOWN
+	
+	velocity = velocity.normalized() * speed
 	move_and_slide()
 	velocity=Vector2(0,0)
 	
 	if(get_last_slide_collision()!=null):
-		if(get_last_slide_collision().get_collider_rid().get_id() == 4170413244417):
-			emit_signal("switch_room")
+		var collider = get_last_slide_collision().get_collider()
+		if(collider.has_meta("path")):
+			print("Hat Path")
+			switch_room.emit(collider.get_meta("path"))
 		pass
 	
 

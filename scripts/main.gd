@@ -15,10 +15,7 @@ func _ready():
 	add_child(player_instance)
 	
 	var chemistry_door_node = get_node("/root/main/player/player")
-	chemistry_door_node.connect("switch_room", go_to_hallway_1, 0)
-	
-	var hallway_1_door_node = get_node("/root/main/player/player")
-	hallway_1_door_node.connect("switch_room", go_to_hallway_2, 0)
+	chemistry_door_node.connect("switch_room", switch_room, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -30,9 +27,3 @@ func switch_room(new_room): #switches the current main_room with another new new
 	main_scene = load(new_room) 
 	main_instance = main_scene.instantiate()  
 	add_child(main_instance)
-
-func go_to_hallway_1():
-	switch_room("res://scenes/hallway_1.tscn")
-	
-func go_to_hallway_2():
-	switch_room("res://scenes/hallway_2.tscn")
