@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://bnlfcoecg2nbk"]
 
-[ext_resource type="Texture2D" uid="uid://b5vyfl8cmuhe7" path="res://assets/Chemiesaal_2(-).png" id="1_tmf37"]
+[ext_resource type="Texture2D" uid="uid://b5vyfl8cmuhe7" path="res://assets/room_chemistry.png" id="1_3jwjq"]
 
 [node name="chemie-saal" type="Node2D"]
 
 [node name="backgroudn" type="Sprite2D" parent="."]
 scale = Vector2(5, 5)
-texture = ExtResource("1_tmf37")
+texture = ExtResource("1_3jwjq")
 
 [node name="map_border" type="StaticBody2D" parent="."]
 
@@ -18,7 +18,7 @@ polygon = PackedVector2Array(-1957.93, 121.065, -1950, 250, -1414, 250, -1414, 2
 
 [node name="door" type="StaticBody2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="door"]
+[node name="door_chemistry" type="CollisionPolygon2D" parent="door"]
 position = Vector2(-18, 89)
 scale = Vector2(1.00259, 0.859045)
 build_mode = 1

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5vyfl8cmuhe7"
-path="res://.godot/imported/Chemiesaal_2(-).png-8bc544999de8405a9b4c6aebaaf47997.ctex"
+path="res://.godot/imported/room_chemistry.png-5354a0c46eb298115b941d18f4623616.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Chemiesaal_2(-).png"
-dest_files=["res://.godot/imported/Chemiesaal_2(-).png-8bc544999de8405a9b4c6aebaaf47997.ctex"]
+source_file="res://assets/room_chemistry.png"
+dest_files=["res://.godot/imported/room_chemistry.png-5354a0c46eb298115b941d18f4623616.ctex"]
 
 [params]
 

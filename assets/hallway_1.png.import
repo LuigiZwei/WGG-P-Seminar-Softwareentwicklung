@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6ufjlf07sv1q"
-path="res://.godot/imported/Flur_1entwurf.png-a5fec49bdec34ec0c91222a1453eb3c0.ctex"
+path="res://.godot/imported/hallway_1.png-25d5ca743785f6275ddb2aeddc38f360.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Flur_1entwurf.png"
-dest_files=["res://.godot/imported/Flur_1entwurf.png-a5fec49bdec34ec0c91222a1453eb3c0.ctex"]
+source_file="res://assets/hallway_1.png"
+dest_files=["res://.godot/imported/hallway_1.png-25d5ca743785f6275ddb2aeddc38f360.ctex"]
 
 [params]
 
