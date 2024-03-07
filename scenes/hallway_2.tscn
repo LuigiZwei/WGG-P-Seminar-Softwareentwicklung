@@ -5,6 +5,8 @@
 [node name="Hallway2" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.52588e-05, -1.52588e-05)
+scale = Vector2(1.18, 1.18)
 texture = ExtResource("1_a8ta8")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
