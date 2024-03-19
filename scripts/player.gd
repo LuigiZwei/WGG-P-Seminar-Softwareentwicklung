@@ -11,28 +11,28 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_pressed("sprint"):
-		speed = player_sprint_speed
-	else:
-		speed = player_speed
-	if Input.is_action_pressed("ui_left"):
-		velocity += Vector2.LEFT
-	if Input.is_action_pressed("ui_right"):
-		velocity += Vector2.RIGHT
-	if Input.is_action_pressed("ui_up"):
-		velocity += Vector2.UP
-	if Input.is_action_pressed("ui_down"):
-		velocity += Vector2.DOWN
+	if(is_visible()):
+		if Input.is_action_pressed("sprint"):
+			speed = player_sprint_speed
+		else:
+			speed = player_speed
+		if Input.is_action_pressed("ui_left"):
+			velocity += Vector2.LEFT
+		if Input.is_action_pressed("ui_right"):
+			velocity += Vector2.RIGHT
+		if Input.is_action_pressed("ui_up"):
+			velocity += Vector2.UP
+		if Input.is_action_pressed("ui_down"):
+			velocity += Vector2.DOWN
 	
-	velocity = velocity.normalized() * speed
-	move_and_slide()
-	velocity=Vector2(0,0)
+		velocity = velocity.normalized() * speed
+		move_and_slide()
+		velocity=Vector2(0,0)
 	
-	if(get_last_slide_collision()!=null):
-		var collider = get_last_slide_collision().get_collider()
-		if(collider.has_meta("path")):
-			print("Hat Path")
-			switch_room.emit(collider.get_meta("path"))
+		if(get_last_slide_collision()!=null):
+			var collider = get_last_slide_collision().get_collider()
+			if(collider.has_meta("path")):
+				switch_room.emit(collider.get_meta("path"))
 		pass
 	
 
