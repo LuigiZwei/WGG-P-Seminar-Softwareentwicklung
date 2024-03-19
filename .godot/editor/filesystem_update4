@@ -1,0 +1,8 @@
+res://scenes/main_menu.tscn
+res://scenes/node_2d.tscn
+res://scenes/player.tscn
+res://scenes/room_chemistry.tscn
+res://scripts/main.gd
+res://scenes/hallway_1.tscn
+res://scripts/player.gd
+res://scenes/Node2D.gd
