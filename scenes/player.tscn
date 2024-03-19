@@ -33,6 +33,7 @@ drag_left_margin = 0.1
 editor_draw_limits = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3

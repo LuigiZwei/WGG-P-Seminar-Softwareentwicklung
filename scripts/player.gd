@@ -5,11 +5,9 @@ const player_sprint_speed = 600
 var speed
 signal switch_room(path)
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if(is_visible()):
 		if Input.is_action_pressed("sprint"):
@@ -33,9 +31,6 @@ func _process(_delta):
 			var collider = get_last_slide_collision().get_collider()
 			if(collider.has_meta("path")):
 				switch_room.emit(collider.get_meta("path"))
-		pass
-	
 
-#called every frame, used for physics stuff
 func _physics_process(_delta):
 	pass

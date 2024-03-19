@@ -4,7 +4,7 @@
 
 [node name="chemie-saal" type="Node2D"]
 
-[node name="backgroudn" type="Sprite2D" parent="."]
+[node name="background" type="Sprite2D" parent="."]
 scale = Vector2(5, 5)
 texture = ExtResource("1_3jwjq")
 
