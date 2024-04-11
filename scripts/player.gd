@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
-const player_speed = 300
-const player_sprint_speed = 600
-var speed
+var player_speed = 300
+var player_sprint_speed = 600
 signal switch_room(path)
 
 func _ready():
 	pass 
 
 func _process(_delta):
+	var speed
 	if(is_visible()):
 		if Input.is_action_pressed("sprint"):
 			speed = player_sprint_speed
