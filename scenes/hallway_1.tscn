@@ -12,10 +12,6 @@ texture = ExtResource("1_as78b")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(-16, -11)
-scale = Vector2(1.00259, 0.859045)
-build_mode = 1
-polygon = PackedVector2Array(880.719, 145.51, 928.595, 224.668, 930.59, 349.225, -877.727, 343.405, -679.241, 173.448, -646.326, 179.269, -604.435, 138.526, 342.114, 136.198, 367.049, 79.1577, 838.828, 84.9781, 859.773, 152.495)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 

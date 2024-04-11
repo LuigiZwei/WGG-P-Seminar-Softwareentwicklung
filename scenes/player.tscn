@@ -58,6 +58,6 @@ stretch_mode = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/HBoxContainer/VBoxContainer"]
+[node name="LabelAufgabenstellungÖffnen" type="Label" parent="CanvasLayer/Control/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Drücke \"E\" um die Aufgabenstellung zu öffnen"
