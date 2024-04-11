@@ -4,26 +4,92 @@ var main_scene
 var main_instance
 var player_scene
 var player_instance
+var status
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	main_scene = preload("res://scenes/room_chemistry.tscn")
-	main_instance = main_scene.instantiate()
-	add_child(main_instance)
+	status = "main_menu"
+	var main_menu_button_container = get_node("CanvasLayer/main_menu/VBoxContainer/HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer")
+	var settings_button_container = get_node("CanvasLayer/settings_menu/PanelContainer/MarginContainer/HBoxContainer")
+	var pause_button_container = get_node("CanvasLayer/pause_menu/PanelContainer/MarginContainer/VBoxContainer")
 	
-	player_scene = preload("res://scenes/player.tscn")
-	player_instance = player_scene.instantiate()
-	add_child(player_instance)
+	main_menu_button_container.get_node("Button").connect("pressed", start_game)
+	main_menu_button_container.get_node("Button2").connect("pressed", get_node("CanvasLayer/settings_menu").show)
+	main_menu_button_container.get_node("Button2").connect("pressed", get_node("CanvasLayer/main_menu").hide)
+	main_menu_button_container.get_node("Button3").connect("pressed", get_tree().quit)
 	
-	var chemistry_door_node = get_node("/root/main/player/player")
+	settings_button_container.get_node("Button").connect("pressed", get_node("CanvasLayer/settings_menu").hide)
+	settings_button_container.get_node("Button").connect("pressed", get_node("CanvasLayer/main_menu").show)
+	
+	pause_button_container.get_node("Button").connect("pressed", get_node("CanvasLayer/pause_menu").hide)
+	pause_button_container.get_node("Button2").connect("pressed", close_game)
+	pause_button_container.get_node("Button3").connect("pressed", get_tree().quit)
+
+func start_game():
+	$CanvasLayer/main_menu.hide()
+	status = "game"
+	
+	$current_room.show()
+	$player.show()
+	$player/CanvasLayer.show()
+	
+	var chemistry_door_node = get_node("/root/main/player")
 	chemistry_door_node.connect("switch_room", switch_room, 0)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func close_game():
+	$player.hide()
+	$player/CanvasLayer.hide()
+	$current_room.hide()
+	$CanvasLayer/pause_menu.hide()
+	$CanvasLayer/main_menu.show()
+	status = "main_menu"
+
 func _process(_delta):
+	if Input.is_action_just_pressed("pause") && (status == "game") && !get_node_or_null("CanvasLayer/task").visible:
+		if $CanvasLayer/pause_menu.visible:
+			$CanvasLayer/pause_menu.hide()
+			$player.player_speed = 300
+			$player.player_sprint_speed = 600
+		else:
+			$CanvasLayer/pause_menu.show()
+			$player.player_speed = 0
+			$player.player_sprint_speed = 0
 	
-	pass
+	if Input.is_action_just_pressed("pause") && (status == "game_typing"):
+		get_node("CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit").release_focus()
 	
-func switch_room(new_room): #switches the current main_room with another new new_room
-	main_instance.queue_free() 
-	main_scene = load(new_room) 
-	main_instance = main_scene.instantiate()  
-	add_child(main_instance)
+	if Input.is_action_just_pressed("task") && (status == "game") && !get_node("CanvasLayer/pause_menu").visible:
+		if(get_node_or_null("CanvasLayer/task") == null):
+			var task_scene = load("res://scenes/task_scene_template.tscn").instantiate()
+			$CanvasLayer.add_child(task_scene)
+			$CanvasLayer.get_node(String(task_scene.get_name())).set_name("task")
+			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",set_status_to_game_typing)
+			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",set_status_to_game)
+			$CanvasLayer/task.show()
+			$player.player_speed = 0
+			$player.player_sprint_speed = 0
+		elif get_node("CanvasLayer/task").visible:
+			$CanvasLayer/task.hide()
+			$player.player_speed = 300
+			$player.player_sprint_speed = 600
+		else:
+			$CanvasLayer/task.show()
+			$player.player_speed = 0
+			$player.player_sprint_speed = 0
+		
+
+func switch_room(new_room):
+	$current_room.set_name("old_room")
+	get_node("old_room").queue_free()
+	if(get_node_or_null("CanvasLayer/task") != null):
+		get_node("CanvasLayer/task").queue_free()
+	var new_instance = load(new_room).instantiate()
+	add_child(new_instance)
+	get_node(String(new_instance.get_name())).set_name("current_room")
+
+func set_status_to_game_typing():
+	status = "game_typing"
+
+func set_status_to_game():
+	status = "game"
+
