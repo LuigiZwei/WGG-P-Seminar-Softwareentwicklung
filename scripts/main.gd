@@ -8,6 +8,26 @@ var status
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Erstellung der InputMap (weil .godot nicht exportiert werden kann, dankeschön)
+	InputMap.add_action("left")
+	add_key_input("left",KEY_A)
+	add_key_input("left",KEY_LEFT)
+	InputMap.add_action("right")
+	add_key_input("right",KEY_D)
+	add_key_input("right",KEY_RIGHT)
+	InputMap.add_action("up")
+	add_key_input("up",KEY_W)
+	add_key_input("up",KEY_UP)
+	InputMap.add_action("down")
+	add_key_input("down",KEY_S)
+	add_key_input("down",KEY_DOWN)
+	InputMap.add_action("sprint")
+	add_key_input("sprint",KEY_SHIFT)
+	InputMap.add_action("pause")
+	add_key_input("pause",KEY_ESCAPE)
+	InputMap.add_action("task")
+	add_key_input("task",KEY_E)
+	
 	# status dient als variable, die aussagen soll, was gerade passiert
 	# kann man wahrscheinlich irgendwie besser machen, aber es kann nützlich sein um
 	# gleichzeitig vieles zu deaktivieren, was an einem bestimmten moment nicht passieren soll
@@ -56,15 +76,16 @@ func close_game():
 
 func _process(_delta):
 	# öffnet oder schließt die pause-UI
-	if Input.is_action_just_pressed("pause") && (status == "game") && !get_node_or_null("CanvasLayer/task").visible:
-		if $CanvasLayer/pause_menu.visible:
-			$CanvasLayer/pause_menu.hide()
-			$player.player_speed = 300
-			$player.player_sprint_speed = 600
-		else:
-			$CanvasLayer/pause_menu.show()
-			$player.player_speed = 0
-			$player.player_sprint_speed = 0
+	if Input.is_action_just_pressed("pause") && (status == "game") && (get_node_or_null("CanvasLayer/task") != null):
+		if !$CanvasLayer/task.visible:
+			if $CanvasLayer/pause_menu.visible:
+				$CanvasLayer/pause_menu.hide()
+				$player.player_speed = 300
+				$player.player_sprint_speed = 600
+			else:
+				$CanvasLayer/pause_menu.show()
+				$player.player_speed = 0
+				$player.player_sprint_speed = 0
 	
 	# beendet das schreiben im aufgaben-menü wenn ESC gedrückt wird
 	if Input.is_action_just_pressed("pause") && (status == "game_typing"):
@@ -108,6 +129,11 @@ func switch_room(new_room):
 	add_child(new_instance)
 	get_node(String(new_instance.get_name())).set_name("current_room")
 
+func add_key_input(action, key):
+	var ev = InputEventKey.new()
+	ev.scancode = key
+	InputMap.action_add_event(action,ev)
+
 # diese funktionen werden in der task UI verwendet, 
 # weil man variablen mit signalen nicht direkt verändern kann und 
 # keine eingabeparameter im connect-befehl angeben kann
@@ -117,4 +143,3 @@ func set_status_to_game_typing():
 	status = "game_typing"
 func set_status_to_game():
 	status = "game"
-

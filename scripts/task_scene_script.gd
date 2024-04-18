@@ -30,10 +30,14 @@ func switch_task_and_input():
 		task_input.show()
 		$PanelContainer/MarginContainer/VBoxContainer/Button.text = "Aufgabenstellung zeigen"
 
-func check_for_solution(_new_text):
-	if(task_output.text == solution):
+func check_for_solution(new_text):
+	if(new_text == solution):
 		# richtige antwort
 		if(task_output.has_focus()):
 			task_output.release_focus()
 	else:
+		pass
 		# falsche antwort
+
+func check_for_solution_with_button():
+	check_for_solution(task_output.text)
