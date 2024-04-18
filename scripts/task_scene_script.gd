@@ -36,4 +36,5 @@ func check_for_solution(_new_text):
 		if(task_output.has_focus()):
 			task_output.release_focus()
 	else:
-		# falsche antwort
+		pass
+		

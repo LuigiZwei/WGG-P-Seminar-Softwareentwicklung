@@ -5,9 +5,11 @@ var main_instance
 var player_scene
 var player_instance
 var status
+var sound_player := AudioStreamPlayer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_child(sound_player)
 	# status dient als variable, die aussagen soll, was gerade passiert
 	# kann man wahrscheinlich irgendwie besser machen, aber es kann nützlich sein um
 	# gleichzeitig vieles zu deaktivieren, was an einem bestimmten moment nicht passieren soll
@@ -96,6 +98,9 @@ func _process(_delta):
 			$player.player_sprint_speed = 0
 
 func switch_room(new_room):
+	var sound_effect = load("res://assets/sound effecs/scream_A♭_minor__bpm_54.mp3")
+	sound_player.stream = sound_effect
+	sound_player.play()
 	$current_room.set_name("old_room")
 	# löschung des alten zimmers 
 	# umbenennung auf "old_room" sodass das neue zimmer sofort auf "current_room" umbenannt werden kann

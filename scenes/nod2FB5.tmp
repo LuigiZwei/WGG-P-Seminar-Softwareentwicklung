@@ -1,0 +1,29 @@
+[gd_scene load_steps=8 format=3 uid="uid://db0xsmwpvijr0"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_sjjdv"]
+[ext_resource type="PackedScene" uid="uid://tjucugqe5hr8" path="res://scenes/pause_menu.tscn" id="2_c04e2"]
+[ext_resource type="PackedScene" uid="uid://b4xdxgjg8338u" path="res://scenes/settings_menu.tscn" id="3_jwbb1"]
+[ext_resource type="PackedScene" uid="uid://deqda1xj4wcdf" path="res://scenes/main_menu.tscn" id="4_xpg2c"]
+[ext_resource type="PackedScene" uid="uid://bnlfcoecg2nbk" path="res://scenes/room_chemistry.tscn" id="5_2yvm8"]
+[ext_resource type="PackedScene" uid="uid://ch5e1fe3aixwt" path="res://scenes/player.tscn" id="6_er3in"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="7_3q6yk"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_sjjdv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="main_menu" parent="CanvasLayer" instance=ExtResource("4_xpg2c")]
+
+[node name="settings_menu" parent="CanvasLayer" instance=ExtResource("3_jwbb1")]
+visible = false
+
+[node name="pause_menu" parent="CanvasLayer" instance=ExtResource("2_c04e2")]
+visible = false
+
+[node name="current_room" parent="." instance=ExtResource("5_2yvm8")]
+visible = false
+
+[node name="player" parent="." instance=ExtResource("6_er3in")]
+visible = false
+script = ExtResource("7_3q6yk")
