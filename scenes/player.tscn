@@ -26,8 +26,10 @@ shape = SubResource("CapsuleShape2D_2q0lb")
 position = Vector2(3.63798e-12, 0)
 zoom = Vector2(0.5, 0.5)
 limit_smoothed = true
+position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_left_margin = 0.1
+drag_bottom_margin = 0.1
 editor_draw_limits = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -56,6 +58,6 @@ stretch_mode = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/HBoxContainer/VBoxContainer"]
+[node name="LabelAufgabenstellungÖffnen" type="Label" parent="CanvasLayer/Control/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Drücke \"E\" um die Aufgabenstellung zu öffnen"
