@@ -28,8 +28,10 @@ limit_top = -635
 limit_right = 2545
 limit_bottom = 635
 limit_smoothed = true
+position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_left_margin = 0.1
+drag_bottom_margin = 0.1
 editor_draw_limits = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

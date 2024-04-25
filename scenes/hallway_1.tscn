@@ -3,19 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://b6ufjlf07sv1q" path="res://assets/hallway_1.png" id="1_as78b"]
 
 [node name="raum2" type="Node2D"]
+texture_filter = 1
 
 [node name="background" type="Sprite2D" parent="."]
-position = Vector2(-7.9167, -2.50002)
-scale = Vector2(1.93667, 1.93667)
+position = Vector2(-8819, -125)
+scale = Vector2(4.60701, 4.60701)
 texture = ExtResource("1_as78b")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
-position = Vector2(0, -1.975)
-scale = Vector2(1, 1.02083)
-polygon = PackedVector2Array(-690, 138, -669, 141, -874, 282, -894, 282)
