@@ -8,25 +8,31 @@ var status
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	# Erstellung der InputMap (weil .godot nicht exportiert werden kann, dankeschön)
+	var key_input_function = func (action, key):
+		var inputkey = InputEventKey.new()
+		inputkey.set_keycode(key)
+		InputMap.action_add_event(action, inputkey)
+	
 	InputMap.add_action("left")
-	add_key_input("left",KEY_A)
-	add_key_input("left",KEY_LEFT)
+	key_input_function.call("left",KEY_A)
+	key_input_function.call("left",KEY_LEFT)
 	InputMap.add_action("right")
-	add_key_input("right",KEY_D)
-	add_key_input("right",KEY_RIGHT)
+	key_input_function.call("right",KEY_D)
+	key_input_function.call("right",KEY_RIGHT)
 	InputMap.add_action("up")
-	add_key_input("up",KEY_W)
-	add_key_input("up",KEY_UP)
+	key_input_function.call("up",KEY_W)
+	key_input_function.call("up",KEY_UP)
 	InputMap.add_action("down")
-	add_key_input("down",KEY_S)
-	add_key_input("down",KEY_DOWN)
+	key_input_function.call("down",KEY_S)
+	key_input_function.call("down",KEY_DOWN)
 	InputMap.add_action("sprint")
-	add_key_input("sprint",KEY_SHIFT)
+	key_input_function.call("sprint",KEY_SHIFT)
 	InputMap.add_action("pause")
-	add_key_input("pause",KEY_ESCAPE)
+	key_input_function.call("pause",KEY_ESCAPE)
 	InputMap.add_action("task")
-	add_key_input("task",KEY_E)
+	key_input_function.call("task",KEY_E)
 	
 	# status dient als variable, die aussagen soll, was gerade passiert
 	# kann man wahrscheinlich irgendwie besser machen, aber es kann nützlich sein um
@@ -53,7 +59,7 @@ func _ready():
 
 func start_game():
 	# versteckt das main menu und zeigt stattdessen den spieler und das momentane zimmer
-	# noch hinzufügen: spielfortschritt speichern
+	# noch hinzufügen: spielfortschritt laden
 	$CanvasLayer/main_menu.hide()
 	status = "game"
 	
@@ -99,8 +105,8 @@ func _process(_delta):
 			var task_scene = load("res://scenes/task_scene_template.tscn").instantiate()
 			$CanvasLayer.add_child(task_scene)
 			$CanvasLayer.get_node(String(task_scene.get_name())).set_name("task")
-			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",set_status_to_game_typing)
-			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",set_status_to_game)
+			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",func(): status = "game_typing")
+			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",func(): status = "game")
 			$CanvasLayer/task.show()
 			# spieler darf sich während die task UI offen ist nicht bewegen
 			$player.player_speed = 0
@@ -129,17 +135,3 @@ func switch_room(new_room):
 	add_child(new_instance)
 	get_node(String(new_instance.get_name())).set_name("current_room")
 
-func add_key_input(action, key):
-	var ev = InputEventKey.new()
-	ev.scancode = key
-	InputMap.action_add_event(action,ev)
-
-# diese funktionen werden in der task UI verwendet, 
-# weil man variablen mit signalen nicht direkt verändern kann und 
-# keine eingabeparameter im connect-befehl angeben kann
-# [...].connect("pressed", status = "game_typing") ist nicht erlaubt
-# (status = "game_typing" ist kein Callable) 
-func set_status_to_game_typing():
-	status = "game_typing"
-func set_status_to_game():
-	status = "game"

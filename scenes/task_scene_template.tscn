@@ -113,4 +113,3 @@ size_flags_stretch_ratio = 0.25
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Button" to="." method="switch_task_and_input"]
 [connection signal="text_submitted" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="check_for_solution"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="check_for_solution_with_button"]

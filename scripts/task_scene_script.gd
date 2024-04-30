@@ -13,6 +13,8 @@ func _ready():
 	task_input = vboxcontainer.get_node("TextEdit")
 	task_output = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit
 	
+	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button.connect("pressed",func():check_for_solution(task_output.text))
+	
 	solution = "42"
 
 func _process(_delta):
@@ -32,12 +34,9 @@ func switch_task_and_input():
 
 func check_for_solution(new_text):
 	if(new_text == solution):
-		# richtige antwort
+		globalscript.task_arr[0] = true
 		if(task_output.has_focus()):
 			task_output.release_focus()
 	else:
 		pass
 		# falsche antwort
-
-func check_for_solution_with_button():
-	check_for_solution(task_output.text)
