@@ -39,4 +39,3 @@ func check_for_solution(new_text):
 			task_output.release_focus()
 	else:
 		pass
-		# falsche antwort

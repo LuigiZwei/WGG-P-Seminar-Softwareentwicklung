@@ -12,8 +12,10 @@ func _process(_delta):
 	if(is_visible()):
 		if Input.is_action_pressed("sprint"):
 			speed = player_sprint_speed
+
 		else:
 			speed = player_speed
+			
 		if Input.is_action_pressed("ui_left"):
 			velocity += Vector2.LEFT
 		if Input.is_action_pressed("ui_right"):
