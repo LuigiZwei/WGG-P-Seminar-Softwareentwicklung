@@ -13,6 +13,8 @@ func _ready():
 	task_input = vboxcontainer.get_node("TextEdit")
 	task_output = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit
 	
+	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button.connect("pressed",func():check_for_solution(task_output.text))
+	
 	solution = "42"
 
 func _process(_delta):
@@ -30,11 +32,10 @@ func switch_task_and_input():
 		task_input.show()
 		$PanelContainer/MarginContainer/VBoxContainer/Button.text = "Aufgabenstellung zeigen"
 
-func check_for_solution(_new_text):
-	if(task_output.text == solution):
-		# richtige antwort
+func check_for_solution(new_text):
+	if(new_text == solution):
+		globalscript.task_arr[0] = true
 		if(task_output.has_focus()):
 			task_output.release_focus()
 	else:
 		pass
-		

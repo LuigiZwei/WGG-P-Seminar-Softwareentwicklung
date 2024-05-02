@@ -9,7 +9,35 @@ var sound_player := AudioStreamPlayer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+
+	
+	# Erstellung der InputMap (weil .godot nicht exportiert werden kann, dankeschön)
+	var key_input_function = func (action, key):
+		var inputkey = InputEventKey.new()
+		inputkey.set_keycode(key)
+		InputMap.action_add_event(action, inputkey)
+	
+	InputMap.add_action("left")
+	key_input_function.call("left",KEY_A)
+	key_input_function.call("left",KEY_LEFT)
+	InputMap.add_action("right")
+	key_input_function.call("right",KEY_D)
+	key_input_function.call("right",KEY_RIGHT)
+	InputMap.add_action("up")
+	key_input_function.call("up",KEY_W)
+	key_input_function.call("up",KEY_UP)
+	InputMap.add_action("down")
+	key_input_function.call("down",KEY_S)
+	key_input_function.call("down",KEY_DOWN)
+	InputMap.add_action("sprint")
+	key_input_function.call("sprint",KEY_SHIFT)
+	InputMap.add_action("pause")
+	key_input_function.call("pause",KEY_ESCAPE)
+	InputMap.add_action("task")
+	key_input_function.call("task",KEY_E)
+  
 	add_child(sound_player)
+  
 	# status dient als variable, die aussagen soll, was gerade passiert
 	# kann man wahrscheinlich irgendwie besser machen, aber es kann nützlich sein um
 	# gleichzeitig vieles zu deaktivieren, was an einem bestimmten moment nicht passieren soll
@@ -35,7 +63,7 @@ func _ready():
 
 func start_game():
 	# versteckt das main menu und zeigt stattdessen den spieler und das momentane zimmer
-	# noch hinzufügen: spielfortschritt speichern
+	# noch hinzufügen: spielfortschritt laden
 	$CanvasLayer/main_menu.hide()
 	status = "game"
 	
@@ -58,15 +86,16 @@ func close_game():
 
 func _process(_delta):
 	# öffnet oder schließt die pause-UI
-	if Input.is_action_just_pressed("pause") && (status == "game") && !get_node_or_null("CanvasLayer/task").visible:
-		if $CanvasLayer/pause_menu.visible:
-			$CanvasLayer/pause_menu.hide()
-			$player.player_speed = 300
-			$player.player_sprint_speed = 600
-		else:
-			$CanvasLayer/pause_menu.show()
-			$player.player_speed = 0
-			$player.player_sprint_speed = 0
+	if Input.is_action_just_pressed("pause") && (status == "game") && (get_node_or_null("CanvasLayer/task") != null):
+		if !$CanvasLayer/task.visible:
+			if $CanvasLayer/pause_menu.visible:
+				$CanvasLayer/pause_menu.hide()
+				$player.player_speed = 300
+				$player.player_sprint_speed = 600
+			else:
+				$CanvasLayer/pause_menu.show()
+				$player.player_speed = 0
+				$player.player_sprint_speed = 0
 	
 	# beendet das schreiben im aufgaben-menü wenn ESC gedrückt wird
 	if Input.is_action_just_pressed("pause") && (status == "game_typing"):
@@ -80,8 +109,8 @@ func _process(_delta):
 			var task_scene = load("res://scenes/task_scene_template.tscn").instantiate()
 			$CanvasLayer.add_child(task_scene)
 			$CanvasLayer.get_node(String(task_scene.get_name())).set_name("task")
-			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",set_status_to_game_typing)
-			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",set_status_to_game)
+			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",func(): status = "game_typing")
+			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",func(): status = "game")
 			$CanvasLayer/task.show()
 			# spieler darf sich während die task UI offen ist nicht bewegen
 			$player.player_speed = 0
@@ -112,14 +141,4 @@ func switch_room(new_room):
 	var new_instance = load(new_room).instantiate()
 	add_child(new_instance)
 	get_node(String(new_instance.get_name())).set_name("current_room")
-
-# diese funktionen werden in der task UI verwendet, 
-# weil man variablen mit signalen nicht direkt verändern kann und 
-# keine eingabeparameter im connect-befehl angeben kann
-# [...].connect("pressed", status = "game_typing") ist nicht erlaubt
-# (status = "game_typing" ist kein Callable) 
-func set_status_to_game_typing():
-	status = "game_typing"
-func set_status_to_game():
-	status = "game"
 

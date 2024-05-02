@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://gigmfptg13vh"]
+[gd_scene load_steps=2 format=3 uid="uid://cvxk1jobekf84"]
 
 [ext_resource type="Texture2D" uid="uid://b6ufjlf07sv1q" path="res://assets/hallway_1.png" id="1_as78b"]
 
 [node name="raum2" type="Node2D"]
-texture_filter = 1
+
+scale = Vector2(1.974, 1.974)
 
 [node name="background" type="Sprite2D" parent="."]
 position = Vector2(-8819, -125)
@@ -13,4 +14,16 @@ texture = ExtResource("1_as78b")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(2974, 265, 2764, 49, 1458, 50, 1356, 107, -1048, 124, -1158, 12, -2333, -1, -2460, 101, -2968, 107, -3013, 56, -3432, 43, -3482, 126, -7787, 113, -7883, 62, -8289.13, 61.1082, -8359, 120, -9140.07, 114.528, -9184, 43, -9584.4, 42.6852, -9648, 120, -20626, 113, -20620, 450, -21148, 846, -20817, -1012, 3200, -970, 3456, 1006, -21318, 1177, -20798, 462, 2976, 467)
+
+position = Vector2(-21.7832, -10.6383)
+scale = Vector2(1.00259, 0.859045)
+build_mode = 1
+polygon = PackedVector2Array(880.719, 145.51, 928.595, 224.668, 930.59, 349.225, 236.363, 346.991, -877.727, 343.405, -679.241, 173.448, -646.326, 179.269, -604.435, 138.526, 342.114, 136.198, 367.049, 79.1577, 838.828, 84.9781, 859.773, 152.495)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2(0, -1.975)
+scale = Vector2(1, 1.02083)
+polygon = PackedVector2Array(-690, 138, -669, 141, -874, 282, -894, 282)
+
