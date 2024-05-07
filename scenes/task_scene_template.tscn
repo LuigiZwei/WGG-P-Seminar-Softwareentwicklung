@@ -58,7 +58,7 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-text = "Text zm beschreiben der Aufgabe"
+text = "Text zum beschreiben der Aufgabe"
 autowrap_mode = 3
 
 [node name="TextEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]

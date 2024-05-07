@@ -6,6 +6,8 @@ var task_input
 var task_output
 # task_output ist die LineEdit node, die den input des spielers beinhält
 # ich habe sie "output" genannt weil der name "input" für den input, den der spieler kriegt, besser passt
+signal task_correct
+signal task_ready_finished
 
 func _ready():
 	var vboxcontainer = $PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer
@@ -15,7 +17,6 @@ func _ready():
 	
 	$PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button.connect("pressed",func():check_for_solution(task_output.text))
 	
-	solution = "42"
 
 func _process(_delta):
 	pass
@@ -33,8 +34,10 @@ func switch_task_and_input():
 		$PanelContainer/MarginContainer/VBoxContainer/Button.text = "Aufgabenstellung zeigen"
 
 func check_for_solution(new_text):
+	if solution == null: pass
+	
 	if(new_text == solution):
-		globalscript.task_arr[0] = true
+		task_correct.emit()
 		if(task_output.has_focus()):
 			task_output.release_focus()
 	else:
