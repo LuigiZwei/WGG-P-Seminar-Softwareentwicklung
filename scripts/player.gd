@@ -3,6 +3,7 @@ extends CharacterBody2D
 var player_speed = 300
 var player_sprint_speed = 600
 signal switch_room(path)
+@onready var animated_sprite = $AnimatedSprite2D
 
 func _ready():
 	pass 
@@ -12,19 +13,26 @@ func _process(_delta):
 	if(is_visible()):
 		if Input.is_action_pressed("sprint"):
 			speed = player_sprint_speed
-
+			animated_sprite.speed_scale = 2
 		else:
 			speed = player_speed
+			animated_sprite.speed_scale = 1
 			
-		if Input.is_action_pressed("ui_left"):
+		if Input.is_action_pressed("left"):
 			velocity += Vector2.LEFT
-		if Input.is_action_pressed("ui_right"):
+			animated_sprite.play("left")
+		if Input.is_action_pressed("right"):
 			velocity += Vector2.RIGHT
-		if Input.is_action_pressed("ui_up"):
+			animated_sprite.play("right")
+		if Input.is_action_pressed("up"):
 			velocity += Vector2.UP
-		if Input.is_action_pressed("ui_down"):
+			animated_sprite.play("up")
+		if Input.is_action_pressed("down"):
 			velocity += Vector2.DOWN
-	
+			animated_sprite.play("down")
+		if velocity.is_zero_approx():
+			animated_sprite.stop()
+		
 		velocity = velocity.normalized() * speed
 		move_and_slide()
 		velocity=Vector2(0,0)

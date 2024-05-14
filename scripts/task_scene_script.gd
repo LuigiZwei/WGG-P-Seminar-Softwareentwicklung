@@ -34,7 +34,7 @@ func switch_task_and_input():
 
 func check_for_solution(new_text):
 	if(new_text == solution):
-		globalscript.task_arr[0] = true
+		#globalscript.task_arr[0] = true
 		if(task_output.has_focus()):
 			task_output.release_focus()
 	else:

@@ -14,6 +14,8 @@ script = ExtResource("1_sjjdv")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="main_menu" parent="CanvasLayer" instance=ExtResource("4_xpg2c")]
+offset_top = -1.0
+offset_right = 1.0
 
 [node name="settings_menu" parent="CanvasLayer" instance=ExtResource("3_jwbb1")]
 visible = false

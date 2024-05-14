@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2m63do038hr3"
-path="res://.godot/imported/info.png-6698764b62a72fae9f34f6f2527ca452.ctex"
+uid="uid://bvr83i78ntn1k"
+path="res://.godot/imported/Game_character_m_unbemalt.png-938fc76c4f4e7660755db72ccbbc0831.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/info.png"
-dest_files=["res://.godot/imported/info.png-6698764b62a72fae9f34f6f2527ca452.ctex"]
+source_file="res://assets/sound effecs/Game_character_m_unbemalt.png"
+dest_files=["res://.godot/imported/Game_character_m_unbemalt.png-938fc76c4f4e7660755db72ccbbc0831.ctex"]
 
 [params]
 
