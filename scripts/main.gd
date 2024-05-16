@@ -57,19 +57,31 @@ func _ready():
 	settings_button_container.get_node("Button").connect("pressed", get_node("CanvasLayer/settings_menu").hide)
 	settings_button_container.get_node("Button").connect("pressed", get_node("CanvasLayer/main_menu").show)
 	
-	pause_button_container.get_node("Button").connect("pressed", get_node("CanvasLayer/pause_menu").hide)
+	pause_button_container.get_node("Button").connect("pressed", start_game)
 	pause_button_container.get_node("Button2").connect("pressed", close_game)
 	pause_button_container.get_node("Button3").connect("pressed", get_tree().quit)
 
 func start_game():
 	# versteckt das main menu und zeigt stattdessen den spieler und das momentane zimmer
 	# noch hinzufügen: spielfortschritt laden
-	$CanvasLayer/main_menu.hide()
-	status = "game"
+	if(get_node_or_null("CanvasLayer/task") == null):
+		# erstellung neuer task UI-szene
+		var task_scene = load("res://scenes/task_scene_template.tscn").instantiate()
+		$CanvasLayer.add_child(task_scene)
+		$CanvasLayer.get_node(String(task_scene.get_name())).set_name("task")
+		$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",func(): status = "game_typing")
+		$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",func(): status = "game")
+		$CanvasLayer/task.hide()
 	
-	$current_room.show()
 	$player.show()
 	$player/CanvasLayer.show()
+	$current_room.show()
+	$CanvasLayer/pause_menu.hide()
+	$CanvasLayer/main_menu.hide()
+	$player.player_speed = 300
+	$player.player_sprint_speed = 600
+	$player.animated_sprite.speed_scale = 1
+	status = "game"
 	
 	var chemistry_door_node = $/root/main/player
 	chemistry_door_node.connect("switch_room", switch_room)
@@ -92,10 +104,12 @@ func _process(_delta):
 				$CanvasLayer/pause_menu.hide()
 				$player.player_speed = 300
 				$player.player_sprint_speed = 600
+				$player.animated_sprite.speed_scale = 1
 			else:
 				$CanvasLayer/pause_menu.show()
 				$player.player_speed = 0
 				$player.player_sprint_speed = 0
+				$player.animated_sprite.speed_scale = 0
 	
 	# beendet das schreiben im aufgaben-menü wenn ESC gedrückt wird
 	if Input.is_action_just_pressed("pause") && (status == "game_typing"):
@@ -104,18 +118,7 @@ func _process(_delta):
 	# erstellt/öffnet/schließt die task UI wenn E gedrückt wird
 	# (solange der spieler nicht bereits in der task ui schreibt)
 	if Input.is_action_just_pressed("task") && (status == "game") && !$CanvasLayer/pause_menu.visible:
-		if(get_node_or_null("CanvasLayer/task") == null):
-			# erstellung neuer task UI-szene
-			var task_scene = load("res://scenes/task_scene_template.tscn").instantiate()
-			$CanvasLayer.add_child(task_scene)
-			$CanvasLayer.get_node(String(task_scene.get_name())).set_name("task")
-			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",func(): status = "game_typing")
-			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",func(): status = "game")
-			$CanvasLayer/task.show()
-			# spieler darf sich während die task UI offen ist nicht bewegen
-			$player.player_speed = 0
-			$player.player_sprint_speed = 0
-		elif $CanvasLayer/task.visible:     # falls task ui bereits existiert wird sie versteckt
+		if $CanvasLayer/task.visible:     # falls task ui bereits existiert wird sie versteckt
 			# task ui verstecken, spieler bewegung wieder aktivieren
 			$CanvasLayer/task.hide()
 			$player.player_speed = 300
