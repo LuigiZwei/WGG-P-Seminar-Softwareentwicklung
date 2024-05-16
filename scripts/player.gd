@@ -26,11 +26,12 @@ func _process(_delta):
 			animated_sprite.play("right")
 		if Input.is_action_pressed("up"):
 			velocity += Vector2.UP
-			animated_sprite.play("up")
+			if velocity.length() ==  1:
+				animated_sprite.play("up")
 		if Input.is_action_pressed("down"):
 			velocity += Vector2.DOWN
-			animated_sprite.play("down")
-			
+			if velocity.length() ==  1:
+				animated_sprite.play("down")
 		if velocity.is_zero_approx():
 			animated_sprite.stop()
 		

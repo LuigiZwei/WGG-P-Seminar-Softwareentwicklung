@@ -58,7 +58,13 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-text = "Text zm beschreiben der Aufgabe"
+text = "Dein Chemie-Lehrer stellt dir ein erstes Rätsel: 
+Wenn du es richtig lösen kannst, erhältst du den Schlüssel,
+um den Chemiesaal zu verlassen. 
+Die Aufgabe lautet: 
+Suche aus folgendem String alle Ziffern heraus. Gib in das Eingabefeld nun die Anzahl der Ziffern ein! 
+Wenn du ein kleines Programm nutzt, wird die Aufgabe einfacher:
+String: "
 autowrap_mode = 3
 
 [node name="TextEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
@@ -66,7 +72,7 @@ visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
-text = "Input-text für den Spieler"
+text = "[H=>kX2S32&sLXL&GesahHx_&6+_gOZ$0aR&%@y]W.7$kFh#871;3T1D^JQGuOu;R/Sf65zg[6$X&@8_u>o?'4fY5Ji5)^qCEbM2G314}34]1E22=%Q+;PX8TywjBNm<]9x/+0;8zD/9Zh1]9/p,iN*)_?pSiQfK10u8vw>ig]>'abhK=73Kdp6FjfV;*96u8)2o$lyN4zio68!+K0v_k0]J35]9S)8/]8VH+8nGs5y?a<8vO0D6;#t[7yw8>?j$$kIR2X02.ez;P0]aj)!_9Y89328049fx0:7hub:7{D:J)$<*6:7T+;]/!5VoB2):n=NMIM:Qt7*632}ccn7v5l@41)]]+z%)Tn?!6#0@Z%4'mbOU$.58#i<'4on_AG#%VM&]83}GN(2HB38*5:00*(Y5.Vvp.d]^Hu5Ffd;<9TjI11eS4E93QG4689-]?Cp}<@!1ngWH^J>l8<:5i{324a2;_8ix9&h-i%a$D@=3+&^31%B36Ps)6*7R89M89>L64',8,x=?]p05k79{9;'%e3e(d!9D55:HJ0E/,0E=rf=#bD)s<]8%g.m(Ut(%3Rh%.B5&7j9I522+2H0l]*c6$1c0d'+N:3&931;8Fi1-y!s#==H?{D_6$;?J1>9BI2}i8==8'#ZA}Ji?Q0)m{Pqt+^B&+4+=0G8BFa[=1_ad)78/0+!10J9;]Q6416QK&;aP!9K:8Y:#9%[39'ut25te3R8/>e9<!7@Z5PpH+y3'LA0-]aqV!]/j46(&266ZtyJ[}D6&1_s03<4z17GNK-cS2[@v@99EQJ96P0%4(15/iM3o2575E}k=eD{I}DgQSzK%M(#4-KRl?s{^I_?h^me%'(16E.4_;5}/83qY30F+7hn%#ae8828-_X'r_}4%?Ez_E!a=9Z[0&?/g!S58xZ_]9747'1{w2%=#6-!k2;#L5.68Z1i0NhFupUzy9R5aZN819s*:A}6+8%D6-^?5/U+tj5Sz)k2!*Tm.^NkHS636"
 editable = false
 context_menu_enabled = false
 drag_and_drop_selection_enabled = false

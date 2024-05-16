@@ -106,9 +106,9 @@ func _process(_delta):
 	if Input.is_action_just_pressed("task") && (status == "game") && !$CanvasLayer/pause_menu.visible:
 		if(get_node_or_null("CanvasLayer/task") == null):
 			# erstellung neuer task UI-szene
-			var task_scene = load("res://scenes/task_scene_template.tscn").instantiate()
-			$CanvasLayer.add_child(task_scene)
-			$CanvasLayer.get_node(String(task_scene.get_name())).set_name("task")
+			var task_scene1 = load("res://scenes/task_1.tscn").instantiate()
+			$CanvasLayer.add_child(task_scene1)
+			$CanvasLayer.get_node(String(task_scene1.get_name())).set_name("task")
 			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",func(): status = "game_typing")
 			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",func(): status = "game")
 			$CanvasLayer/task.show()
@@ -127,7 +127,7 @@ func _process(_delta):
 			$player.player_sprint_speed = 0
 
 func switch_room(new_room):
-	var sound_effect = load("res://assets/sound effecs/scream_A♭_minor__bpm_54.mp3")
+	var sound_effect = load("res://assets/sound effecs/scream.mp3")
 	sound_player.stream = sound_effect
 	sound_player.play()
 	$current_room.set_name("old_room")

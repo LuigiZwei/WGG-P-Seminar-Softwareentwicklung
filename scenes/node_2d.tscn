@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://tjucugqe5hr8" path="res://scenes/pause_menu.tscn" id="2_c04e2"]
 [ext_resource type="PackedScene" uid="uid://b4xdxgjg8338u" path="res://scenes/settings_menu.tscn" id="3_jwbb1"]
 [ext_resource type="PackedScene" uid="uid://deqda1xj4wcdf" path="res://scenes/main_menu.tscn" id="4_xpg2c"]
-[ext_resource type="PackedScene" uid="uid://bnlfcoecg2nbk" path="res://scenes/room_chemistry.tscn" id="5_2yvm8"]
+[ext_resource type="PackedScene" uid="uid://c2s52sshownot" path="res://scenes/room_chemistry.tscn" id="5_2yvm8"]
 [ext_resource type="PackedScene" uid="uid://ch5e1fe3aixwt" path="res://scenes/player.tscn" id="6_er3in"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="7_3q6yk"]
 
