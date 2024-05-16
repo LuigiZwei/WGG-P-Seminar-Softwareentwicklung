@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://ch5e1fe3aixwt"]
 
-[ext_resource type="Texture2D" uid="uid://355halaiqi70" path="res://assets/Game_character_m_unbemalt_2.png" id="2_5i087"]
+[ext_resource type="Texture2D" uid="uid://355halaiqi70" path="res://assets/sound effecs/Game_character_m_unbemalt_2.png" id="2_5i087"]
 [ext_resource type="Texture2D" uid="uid://c2m63do038hr3" path="res://assets/info.png" id="3_fetn4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2q0lb"]

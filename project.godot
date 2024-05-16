@@ -19,6 +19,9 @@ config/icon="res://assets/icon.svg"
 
 globalscript="*res://scripts/globalscript.gd"
 
+[dotnet]
+
+project/assembly_name="P-Seminar-Informatik"
 
 [editor]
 

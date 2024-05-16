@@ -30,6 +30,7 @@ func _process(_delta):
 		if Input.is_action_pressed("down"):
 			velocity += Vector2.DOWN
 			animated_sprite.play("down")
+			
 		if velocity.is_zero_approx():
 			animated_sprite.stop()
 		
