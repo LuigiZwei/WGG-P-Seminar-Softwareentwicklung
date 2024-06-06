@@ -16,8 +16,8 @@ func _ready():
 		"room_chemistry":["Chemieraum","was ist 27 + 15","42"],
 		"hallway_1":["???","2 x ? = 86","43"]
 	}
-	
-	# Erstellung der InputMap (weil .godot nicht exportiert werden kann, dankeschön)
+	#region InputMap erstellen
+	#(weil .godot nicht exportiert werden kann, dankeschön)
 	var key_input_function = func (action, key):
 		var inputkey = InputEventKey.new()
 		inputkey.set_keycode(key)
@@ -48,6 +48,7 @@ func _ready():
 	if(!InputMap.has_action("task")):
 		InputMap.add_action("task")
 		key_input_function.call("task",KEY_E)
+	#endregion
 	
 	add_child(sound_player)
   
@@ -59,7 +60,6 @@ func _ready():
 	var main_menu_button_container = $CanvasLayer/main_menu/VBoxContainer/HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer
 	var settings_button_container = $CanvasLayer/settings_menu/PanelContainer/MarginContainer/HBoxContainer
 	var pause_button_container = $CanvasLayer/pause_menu/PanelContainer/MarginContainer/VBoxContainer
-	
 	
 	# verbindet die "pressed"-signale der knöpfe mit deren jeweiligen funktionen
 	#                              vv  kann hier kein $Button verwenden :(
