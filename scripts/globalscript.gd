@@ -21,7 +21,7 @@ func finish_task():
 	pass
 
 func save_progress():
-	var file = FileAccess.open("user://progress.dat",FileAccess.READ_WRITE)
+	var _file = FileAccess.open("user://progress.dat",FileAccess.READ_WRITE)
 	
 	# speichere task_arr zu progress.dat
 	# (irgendwie)

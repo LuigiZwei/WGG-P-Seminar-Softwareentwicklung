@@ -38,7 +38,7 @@ func _ready():
   
 	add_child(sound_player)
   
-	# status dient als variable, die aussagen soll, was gerade passiert
+   	# status dient als variable, die aussagen soll, was gerade passiert
 	# kann man wahrscheinlich irgendwie besser machen, aber es kann nützlich sein um
 	# gleichzeitig vieles zu deaktivieren, was an einem bestimmten moment nicht passieren soll
 	status = "main_menu"
@@ -66,12 +66,18 @@ func start_game():
 	# noch hinzufügen: spielfortschritt laden
 	if(get_node_or_null("CanvasLayer/task") == null):
 		# erstellung neuer task UI-szene
-		var task_scene = load("res://scenes/task_scene_template.tscn").instantiate()
+		var task_scene = load("res://scenes/task_1.tscn").instantiate()
 		$CanvasLayer.add_child(task_scene)
 		$CanvasLayer.get_node(String(task_scene.get_name())).set_name("task")
 		$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",func(): status = "game_typing")
 		$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",func(): status = "game")
 		$CanvasLayer/task.hide()
+	
+	#erstellung des einführungsszene
+	var intro_scene = load("res://scenes/intro.tscn").instantiate()
+	$CanvasLayer.add_child(intro_scene)
+	$CanvasLayer.get_node(String(intro_scene.get_name())).set_name("intro")
+		
 	
 	$player.show()
 	$player/CanvasLayer.show()

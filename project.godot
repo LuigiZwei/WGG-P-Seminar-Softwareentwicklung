@@ -27,6 +27,10 @@ project/assembly_name="P-Seminar-Informatik"
 
 movie_writer/movie_file="C:/Users/maxkl/Downloads/movie.avi"
 
+[editor_plugins]
+
+enabled=PackedStringArray()
+
 [input]
 
 left={
