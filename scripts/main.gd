@@ -103,12 +103,8 @@ func _process(_delta):
 		if !$CanvasLayer/task.visible:
 			if $CanvasLayer/pause_menu.visible:
 				$CanvasLayer/pause_menu.hide()
-<<<<<<< HEAD
-				$player.show()
-				$player.player_speed = 300
-=======
 				$player.player_speed = 1300
->>>>>>> 1705f4b (made sure that room changes work)
+
 				$player.player_sprint_speed = 600
 				$player.animated_sprite.speed_scale = 1
 			else:
