@@ -110,7 +110,6 @@ func _process(_delta):
 				$CanvasLayer/pause_menu.hide()
 				$player.player_speed = 1300
 				$player.show()
-
 				$player.player_sprint_speed = 600
 				$player.animated_sprite.speed_scale = 1
 			else:
