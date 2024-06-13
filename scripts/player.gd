@@ -2,8 +2,7 @@ extends CharacterBody2D
 
 var player_speed = 300
 var player_sprint_speed = 600
-signal switch_room(path,Vec2)
-
+signal switch_room(path)
 @onready var animated_sprite = $AnimatedSprite2D
 
 func _ready():
@@ -43,13 +42,7 @@ func _process(_delta):
 		if(get_last_slide_collision()!=null):
 			var collider = get_last_slide_collision().get_collider()
 			if(collider.has_meta("path")):
-				switch_room.emit(collider.get_meta("path"), collider.get_meta("where_to"))
-				
+				switch_room.emit(collider.get_meta("path"))
 
 func _physics_process(_delta):
 	pass
-
-func set_pos(input_position):
-	print(input_position)
-	global_position.x = input_position.x
-	global_position.y = input_position.y

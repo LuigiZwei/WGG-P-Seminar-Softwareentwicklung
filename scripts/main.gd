@@ -17,17 +17,23 @@ func _ready():
 		inputkey.set_keycode(key)
 		InputMap.action_add_event(action, inputkey)
 	
-
+	InputMap.add_action("left")
 	key_input_function.call("left",KEY_A)
 	key_input_function.call("left",KEY_LEFT)
+	InputMap.add_action("right")
 	key_input_function.call("right",KEY_D)
 	key_input_function.call("right",KEY_RIGHT)
+	InputMap.add_action("up")
 	key_input_function.call("up",KEY_W)
 	key_input_function.call("up",KEY_UP)
+	InputMap.add_action("down")
 	key_input_function.call("down",KEY_S)
 	key_input_function.call("down",KEY_DOWN)
+	InputMap.add_action("sprint")
 	key_input_function.call("sprint",KEY_SHIFT)
+	InputMap.add_action("pause")
 	key_input_function.call("pause",KEY_ESCAPE)
+	InputMap.add_action("task")
 	key_input_function.call("task",KEY_E)
   
 	add_child(sound_player)
@@ -78,14 +84,13 @@ func start_game():
 	$current_room.show()
 	$CanvasLayer/pause_menu.hide()
 	$CanvasLayer/main_menu.hide()
-	$player.player_speed = 1300
+	$player.player_speed = 300
 	$player.player_sprint_speed = 600
 	$player.animated_sprite.speed_scale = 1
 	status = "game"
 	
-	var player = $/root/main/player
-	player.connect("switch_room", switch_room)
-
+	var chemistry_door_node = $/root/main/player
+	chemistry_door_node.connect("switch_room", switch_room)
 
 func close_game():
 	# versteckt das spiel und den spieler und öffnet das main menu
@@ -103,12 +108,8 @@ func _process(_delta):
 		if !$CanvasLayer/task.visible:
 			if $CanvasLayer/pause_menu.visible:
 				$CanvasLayer/pause_menu.hide()
-<<<<<<< HEAD
 				$player.show()
 				$player.player_speed = 300
-=======
-				$player.player_speed = 1300
->>>>>>> 1705f4b (made sure that room changes work)
 				$player.player_sprint_speed = 600
 				$player.animated_sprite.speed_scale = 1
 			else:
@@ -150,7 +151,7 @@ func _process(_delta):
 			$player.player_speed = 0
 			$player.player_sprint_speed = 0
 
-func switch_room(new_room, position):
+func switch_room(new_room):
 	var sound_effect = load("res://assets/sound effecs/scream.mp3")
 	sound_player.stream = sound_effect
 	sound_player.play()
@@ -163,7 +164,6 @@ func switch_room(new_room, position):
 		get_node("CanvasLayer/task").queue_free()
 	# erstellung und umbenennung der neuen szene
 	var new_instance = load(new_room).instantiate()
-	$player.set_pos(position)
 	add_child(new_instance)
 	get_node(String(new_instance.get_name())).set_name("current_room")
 
