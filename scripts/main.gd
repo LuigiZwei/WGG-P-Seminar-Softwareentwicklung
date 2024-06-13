@@ -6,16 +6,11 @@ var player_scene
 var player_instance
 var status
 var current_room_path
-var task_dict
 var sound_player := AudioStreamPlayer.new()
 
 func _ready():
 	current_room_path = "res://scenes/room_chemistry.tscn"
-	task_dict = {
-		#vorlage: (name des zimmers aus dessen path OHNE res://scenes/ und OHNE .tscn):[Überschrift,Aufgabentext,Lösung]
-		"room_chemistry":["Chemieraum","was ist 27 + 15","42"],
-		"hallway_1":["???","2 x ? = 86","43"]
-	}
+	
 	#region InputMap erstellen
 	#(weil .godot nicht exportiert werden kann, dankeschön)
 	var key_input_function = func (action, key):
@@ -73,7 +68,9 @@ func _ready():
 	
 	pause_button_container.get_node("Button").connect("pressed", get_node("CanvasLayer/pause_menu").hide)
 	pause_button_container.get_node("Button2").connect("pressed", close_game)
-	pause_button_container.get_node("Button3").connect("pressed", get_tree().quit)
+	pause_button_container.get_node("Button3").connect("pressed", func(): 
+		await globalscript.save_progress()
+		get_tree().quit)
 
 func start_game():
 	# versteckt das main menu und zeigt stattdessen den spieler und das momentane zimmer
@@ -123,12 +120,18 @@ func _process(_delta):
 			var task_scene = load("res://scenes/task_scene_template.tscn").instantiate()
 			$CanvasLayer.add_child(task_scene)
 			$CanvasLayer.get_node(String(task_scene.get_name())).set_name("task")
-			var simple_room_path = current_room_path.right(-13)
-			simple_room_path = simple_room_path.left(-5)
-			var task_info_arr = task_dict.get(simple_room_path)
-			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/Label.text = task_info_arr[0]
-			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Label.text = task_info_arr[1]
-			$CanvasLayer/task.solution = task_info_arr[2]
+			var task_file_path = current_room_path.left(-5)
+			task_file_path = task_file_path.right(-13)
+			task_file_path = "res://assets/tasks/" + task_file_path + ".txt"
+			print(task_file_path)
+			if(!FileAccess.file_exists(task_file_path)):
+				print("task_file existiert nicht für raum " + current_room_path)
+				print("bitte "+task_file_path+" erstellen")
+			else:
+				var task_file = FileAccess.open(task_file_path,FileAccess.READ)
+				$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/Label.text = task_file.get_line()
+				$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Label.text = task_file.get_line()
+				$CanvasLayer/task.solution = task_file.get_line()
 			$CanvasLayer/task.connect("task_correct",task_correct)
 			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",func(): status = "game_typing")
 			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",func(): status = "game")

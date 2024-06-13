@@ -9,10 +9,9 @@ var room_arr
 func _ready():
 	room_arr = []
 	# lade task_arr mit FileAccess
-	var file = FileAccess.open("user://progress.dat",FileAccess.READ)
-	if(file != null):
-		# hier task_arr von progress.dat laden
-		pass
+	if(FileAccess.file_exists("user://progress.dat")):
+		var file = FileAccess.open("user://progress.dat",FileAccess.READ)
+		var content = file.get_as_text()
 	else:
 		# task_arr erstellen
 		task_arr = Array()
@@ -21,10 +20,15 @@ func _ready():
 
 func finish_task(room_path):
 	print(room_path)
+	print("^^ Aufgabe richtig !!")
 	pass
 
 func save_progress():
+	if(!FileAccess.file_exists("user://progress.dat")):
+		FileAccess.open("user://progress.dat",FileAccess.WRITE)
 	var file = FileAccess.open("user://progress.dat",FileAccess.READ_WRITE)
+	file.store_string("hello world!")
+	file.close()
 	# speichere task_arr zu progress.dat
 	# (irgendwie)
 
