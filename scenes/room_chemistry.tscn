@@ -18,7 +18,6 @@ polygon = PackedVector2Array(-2596.28, -796.233, -2569.35, 855.601, -2433.7, 861
 
 [node name="door" type="StaticBody2D" parent="."]
 metadata/path = "res://scenes/hallway_1.tscn"
-metadata/where_to = Vector2(2555, -40)
 
 [node name="door_chemistry" type="CollisionPolygon2D" parent="door"]
 position = Vector2(-18, 89)
