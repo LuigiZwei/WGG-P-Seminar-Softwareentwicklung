@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi8y0kdswn6yh"]
+
+[ext_resource type="Texture2D" uid="uid://dtj5oncrkcdvr" path="res://assets/Klassenzimmer324.png" id="1_i31rv"]
+
+[node name="chemie-saal" type="Node2D"]
+
+[node name="background" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(5, 5)
+texture = ExtResource("1_i31rv")
+
+[node name="map_border" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map_border"]
+position = Vector2(-16, -11)
+scale = Vector2(1.00259, 0.859045)
+build_mode = 1
+polygon = PackedVector2Array(27.9277, 584.37, 27.9277, 584.37, 495.716, -16.2972, -213.447, -22.1176, -697.194, 590.19, -820.874, 584.37, -303.215, -24.4458, -961.51, -8.14858, -1461.22, 607.652, -1610.83, 597.175, -1109.13, -18.6253, -1828.26, -16.2972, -2542.42, 733.373, -2540.42, 880.047, 2202.3, 880.047, 2204.29, 623.949, 1810.31, 168.792, 1772.41, 189.746, 1752.46, 150.167, 1763.43, 103.603, 1524.05, 103.603, 1407.35, -16.2972, 1317.59, -16.2972, 1405.36, 208.371, 1396.38, 409.757, 1141.04, 406.265, 1035.32, -18.6253, 641.339, -11.6408, 155.597, 592.518)
