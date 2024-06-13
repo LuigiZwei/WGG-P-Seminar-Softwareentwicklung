@@ -108,11 +108,13 @@ func _process(_delta):
 		if !$CanvasLayer/task.visible:
 			if $CanvasLayer/pause_menu.visible:
 				$CanvasLayer/pause_menu.hide()
+				$player.show()
 				$player.player_speed = 300
 				$player.player_sprint_speed = 600
 				$player.animated_sprite.speed_scale = 1
 			else:
 				$CanvasLayer/pause_menu.show()
+				$player.hide()
 				$player.player_speed = 0
 				$player.player_sprint_speed = 0
 				$player.animated_sprite.speed_scale = 0
@@ -132,17 +134,20 @@ func _process(_delta):
 			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",func(): status = "game_typing")
 			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",func(): status = "game")
 			$CanvasLayer/task.show()
+			$player.hide()
 			# spieler darf sich während die task UI offen ist nicht bewegen
 			$player.player_speed = 0
 			$player.player_sprint_speed = 0
 		if $CanvasLayer/task.visible:     # falls task ui bereits existiert wird sie versteckt
 			# task ui verstecken, spieler bewegung wieder aktivieren
 			$CanvasLayer/task.hide()
+			$player.show()
 			$player.player_speed = 300
 			$player.player_sprint_speed = 600
 		else:
 			# task ui zeigen und spieler bewegung deaktivieren
 			$CanvasLayer/task.show()
+			$player.hide()
 			$player.player_speed = 0
 			$player.player_sprint_speed = 0
 
