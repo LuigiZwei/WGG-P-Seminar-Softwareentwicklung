@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://db0xsmwpvijr0"]
+[gd_scene load_steps=9 format=3 uid="uid://db0xsmwpvijr0"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_sjjdv"]
 [ext_resource type="PackedScene" uid="uid://tjucugqe5hr8" path="res://scenes/pause_menu.tscn" id="2_c04e2"]
+[ext_resource type="Theme" uid="uid://b3l8ixay358s5" path="res://assets/game_theme.tres" id="3_aavfg"]
 [ext_resource type="PackedScene" uid="uid://b4xdxgjg8338u" path="res://scenes/settings_menu.tscn" id="3_jwbb1"]
 [ext_resource type="PackedScene" uid="uid://deqda1xj4wcdf" path="res://scenes/main_menu.tscn" id="4_xpg2c"]
 [ext_resource type="PackedScene" uid="uid://c2s52sshownot" path="res://scenes/room_chemistry.tscn" id="5_2yvm8"]
@@ -16,12 +17,15 @@ script = ExtResource("1_sjjdv")
 [node name="main_menu" parent="CanvasLayer" instance=ExtResource("4_xpg2c")]
 offset_top = -1.0
 offset_right = 1.0
+theme = ExtResource("3_aavfg")
 
 [node name="settings_menu" parent="CanvasLayer" instance=ExtResource("3_jwbb1")]
 visible = false
+theme = ExtResource("3_aavfg")
 
 [node name="pause_menu" parent="CanvasLayer" instance=ExtResource("2_c04e2")]
 visible = false
+theme = ExtResource("3_aavfg")
 
 [node name="current_room" parent="." instance=ExtResource("5_2yvm8")]
 visible = false

@@ -5,37 +5,46 @@ var main_instance
 var player_scene
 var player_instance
 var status
+var current_room_path
 var sound_player := AudioStreamPlayer.new()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-
+	current_room_path = "res://scenes/room_chemistry.tscn"
 	
-	# Erstellung der InputMap (weil .godot nicht exportiert werden kann, dankeschön)
+	#region InputMap erstellen
+	#(weil .godot nicht exportiert werden kann, dankeschön)
 	var key_input_function = func (action, key):
 		var inputkey = InputEventKey.new()
 		inputkey.set_keycode(key)
 		InputMap.action_add_event(action, inputkey)
 	
-	InputMap.add_action("left")
-	key_input_function.call("left",KEY_A)
-	key_input_function.call("left",KEY_LEFT)
-	InputMap.add_action("right")
-	key_input_function.call("right",KEY_D)
-	key_input_function.call("right",KEY_RIGHT)
-	InputMap.add_action("up")
-	key_input_function.call("up",KEY_W)
-	key_input_function.call("up",KEY_UP)
-	InputMap.add_action("down")
-	key_input_function.call("down",KEY_S)
-	key_input_function.call("down",KEY_DOWN)
-	InputMap.add_action("sprint")
-	key_input_function.call("sprint",KEY_SHIFT)
-	InputMap.add_action("pause")
-	key_input_function.call("pause",KEY_ESCAPE)
-	InputMap.add_action("task")
-	key_input_function.call("task",KEY_E)
-  
+	if(!InputMap.has_action("left")):
+		InputMap.add_action("left")
+		key_input_function.call("left",KEY_A)
+		key_input_function.call("left",KEY_LEFT)
+	if(!InputMap.has_action("right")):
+		InputMap.add_action("right")
+		key_input_function.call("right",KEY_D)
+		key_input_function.call("right",KEY_RIGHT)
+	if(!InputMap.has_action("up")):
+		InputMap.add_action("up")
+		key_input_function.call("up",KEY_W)
+		key_input_function.call("up",KEY_UP)
+	if(!InputMap.has_action("down")):
+		InputMap.add_action("down")
+		key_input_function.call("down",KEY_S)
+		key_input_function.call("down",KEY_DOWN)
+	if(!InputMap.has_action("sprint")):
+		InputMap.add_action("sprint")
+		key_input_function.call("sprint",KEY_SHIFT)
+	if(!InputMap.has_action("pause")):
+		InputMap.add_action("pause")
+		key_input_function.call("pause",KEY_ESCAPE)
+	if(!InputMap.has_action("task")):
+		InputMap.add_action("task")
+		key_input_function.call("task",KEY_E)
+	#endregion
+	
 	add_child(sound_player)
   
    	# status dient als variable, die aussagen soll, was gerade passiert
@@ -59,7 +68,9 @@ func _ready():
 	
 	pause_button_container.get_node("Button").connect("pressed", start_game)
 	pause_button_container.get_node("Button2").connect("pressed", close_game)
-	pause_button_container.get_node("Button3").connect("pressed", get_tree().quit)
+	pause_button_container.get_node("Button3").connect("pressed", func(): 
+		await globalscript.save_progress()
+		get_tree().quit)
 
 func start_game():
 	# versteckt das main menu und zeigt stattdessen den spieler und das momentane zimmer
@@ -131,6 +142,19 @@ func _process(_delta):
 			var task_scene1 = load("res://scenes/task_1.tscn").instantiate()
 			$CanvasLayer.add_child(task_scene1)
 			$CanvasLayer.get_node(String(task_scene1.get_name())).set_name("task")
+			var task_file_path = current_room_path.left(-5)
+			task_file_path = task_file_path.right(-13)
+			task_file_path = "res://assets/tasks/" + task_file_path + ".txt"
+			print(task_file_path)
+			if(!FileAccess.file_exists(task_file_path)):
+				print("task_file existiert nicht für raum " + current_room_path)
+				print("bitte "+task_file_path+" erstellen")
+			else:
+				var task_file = FileAccess.open(task_file_path,FileAccess.READ)
+				$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/Label.text = task_file.get_line()
+				$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Label.text = task_file.get_line()
+				$CanvasLayer/task.solution = task_file.get_line()
+			$CanvasLayer/task.connect("task_correct",task_correct)
 			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_entered",func(): status = "game_typing")
 			$CanvasLayer/task/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LineEdit.connect("focus_exited",func(): status = "game")
 			$CanvasLayer/task.show()
@@ -153,6 +177,7 @@ func _process(_delta):
 
 func switch_room(new_room):
 	var sound_effect = load("res://assets/sound effecs/scream.mp3")
+	current_room_path = new_room
 	sound_player.stream = sound_effect
 	sound_player.play()
 	$current_room.set_name("old_room")
@@ -167,3 +192,8 @@ func switch_room(new_room):
 	add_child(new_instance)
 	get_node(String(new_instance.get_name())).set_name("current_room")
 
+func task_correct():
+	globalscript.finish_task(current_room_path)
+
+func get_task_text():
+	pass

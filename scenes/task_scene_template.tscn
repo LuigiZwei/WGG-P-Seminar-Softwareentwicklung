@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://w5snangyiqx1"]
+[gd_scene load_steps=3 format=3 uid="uid://w5snangyiqx1"]
 
+[ext_resource type="Theme" uid="uid://b3l8ixay358s5" path="res://assets/game_theme.tres" id="1_hw2bx"]
 [ext_resource type="Script" path="res://scripts/task_scene_script.gd" id="1_jgphn"]
 
 [node name="Control" type="Control"]
@@ -13,6 +14,7 @@ offset_right = -200.0
 offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_hw2bx")
 script = ExtResource("1_jgphn")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -58,7 +60,7 @@ size_flags_vertical = 3
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-text = "Text zm beschreiben der Aufgabe"
+text = "Text zum beschreiben der Aufgabe"
 autowrap_mode = 3
 
 [node name="TextEdit" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
@@ -80,6 +82,13 @@ size_flags_stretch_ratio = 0.25
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 toggle_mode = true
 text = "Input zeigen"
 alignment = 0
